@@ -6,6 +6,8 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
+import Article from '../Article/Article'
+
 export const QUERY: TypedDocumentNode<
   ArticlesQuery,
   ArticlesQueryVariables
@@ -32,13 +34,7 @@ export const Success = ({ articles }: CellSuccessProps<ArticlesQuery>) => {
   return (
     <ul>
       {articles.map((article) => (
-        <article key={article.id}>
-          <header>
-            <h2>{article.title}</h2>
-          </header>
-          <p>{article.body}</p>
-          <div>Posted at: {article.createdAt}</div>
-        </article>
+        <Article key={article.id} article={article} />
       ))}
     </ul>
   )
