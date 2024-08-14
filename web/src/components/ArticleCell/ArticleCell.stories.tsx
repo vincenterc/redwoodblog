@@ -1,14 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { StoryObj } from '@storybook/react'
 
 import { Loading, Empty, Failure, Success } from './ArticleCell'
 import { standard } from './ArticleCell.mock'
-
-const meta: Meta = {
-  title: 'Cells/ArticleCell',
-  tags: ['autodocs'],
-}
-
-export default meta
 
 export const loading: StoryObj<typeof Loading> = {
   render: () => {
@@ -29,7 +22,9 @@ export const failure: StoryObj<typeof Failure> = {
 }
 
 export const success: StoryObj<typeof Success> = {
-  render: (args) => {
-    return Success ? <Success {...standard()} {...args} /> : <></>
+  render: () => {
+    return Success ? <Success article={standard().article} /> : null
   },
 }
+
+export default { title: 'Cells/ArticleCell' }
