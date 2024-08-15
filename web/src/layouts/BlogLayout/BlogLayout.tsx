@@ -11,37 +11,57 @@ const BlogLayout = ({ children }: BlogLayoutProps) => {
 
   return (
     <>
-      <header>
-        <div className="flex-between">
-          <h1>
-            <Link to={routes.home()}>Redwood Blog</Link>
-          </h1>
-          {isAuthenticated ? (
-            <div>
-              <span>Logged in as {currentUser.email}</span>{' '}
-              <button type="button" onClick={logOut}>
-                Logout
-              </button>
-            </div>
-          ) : (
-            <Link to={routes.login()}>Login</Link>
-          )}
-        </div>
+      <header className="relative flex items-center justify-between bg-blue-700 px-8 py-4 text-white">
+        <h1 className="text-5xl font-semibold tracking-tight">
+          <Link
+            className="text-blue-400 transition duration-100 hover:text-blue-100"
+            to={routes.home()}
+          >
+            Redwood Blog
+          </Link>
+        </h1>
         <nav>
-          <ul>
+          <ul className="relative flex items-center font-light">
             <li>
-              <Link to={routes.home()}>Home</Link>
+              <Link
+                className="rounded px-4 py-2 transition duration-100 hover:bg-blue-600"
+                to={routes.about()}
+              >
+                About
+              </Link>
             </li>
             <li>
-              <Link to={routes.about()}>About</Link>
+              <Link
+                className="rounded px-4 py-2 transition duration-100 hover:bg-blue-600"
+                to={routes.contact()}
+              >
+                Contact
+              </Link>
             </li>
             <li>
-              <Link to={routes.contact()}>Contact</Link>
+              {isAuthenticated ? (
+                <div>
+                  <button className="px-4 py-2" type="button" onClick={logOut}>
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <Link className="px-4 py-2" to={routes.login()}>
+                  Login
+                </Link>
+              )}
             </li>
           </ul>
+          {isAuthenticated && (
+            <div className="absolute bottom-1 right-0 mr-12 text-xs text-blue-300">
+              {currentUser.email}
+            </div>
+          )}
         </nav>
       </header>
-      <main>{children}</main>
+      <main className="mx-auto max-w-4xl rounded-b bg-white p-12 shadow">
+        {children}
+      </main>
     </>
   )
 }
