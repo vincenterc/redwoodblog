@@ -1,5 +1,5 @@
 import type { Prisma } from '@prisma/client'
-import type { QueryResolvers, CommentRelationResolvers } from 'types/graphql'
+import type { CommentRelationResolvers } from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
@@ -9,7 +9,9 @@ export const comments = ({
   return db.comment.findMany({ where: { postId } })
 }
 
-export const comment: QueryResolvers['comment'] = ({ id }) => {
+export const comment = ({
+  id,
+}: Required<Pick<Prisma.CommentWhereUniqueInput, 'id'>>) => {
   return db.comment.findUnique({
     where: { id },
   })
