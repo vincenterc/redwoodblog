@@ -17,6 +17,7 @@ export const QUERY: TypedDocumentNode<
       id
       name
       body
+      postId
       createdAt
     }
   }
